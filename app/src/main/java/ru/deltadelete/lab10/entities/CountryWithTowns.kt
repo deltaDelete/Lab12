@@ -1,12 +1,12 @@
-package ru.deltadelete.lab10.entities;
+package ru.deltadelete.lab10.entities
 
-import androidx.room.Embedded;
-import androidx.room.Relation;
+import androidx.room.Embedded
+import androidx.room.Relation
 
-import java.util.List;
+public data class CountryWithTowns (
+    @Embedded
+    var country: Country? = null,
 
-public class CountryWithTowns {
-    @Embedded public Country country;
     @Relation(parentColumn = "country_id", entityColumn = "country_id")
-    public List<Town> towns;
-}
+    var towns: List<Town>? = null,
+)

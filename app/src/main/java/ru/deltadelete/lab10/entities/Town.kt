@@ -1,32 +1,33 @@
-package ru.deltadelete.lab10.entities;
+package ru.deltadelete.lab10.entities
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.Companion.CASCADE
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+import ru.deltadelete.lab10.entities.Country
 
 @Entity(
-        tableName = "towns",
-        foreignKeys = {
-                @ForeignKey(
-                        entity = Country.class,
-                        parentColumns = {"country_id"},
-                        childColumns = {"country_id"},
-                        onDelete = ForeignKey.CASCADE
-                )
-        }
+    tableName = "towns",
+    foreignKeys = [ForeignKey(
+        entity = Country::class,
+        parentColumns = ["country_id"],
+        childColumns = ["country_id"],
+        onDelete = CASCADE
+    )]
 )
-public class Town {
+public data class Town (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "town_id")
-    public int id;
+    val id  : Int = 0,
 
     @ColumnInfo(name = "town_name")
-    public String name;
+    val name: String,
 
-    @ColumnInfo()
-    public String description;
+    @ColumnInfo
+    val description: String,
 
-    @ColumnInfo(name = "country_id")
-    public int countryId;
-}
+    @ColumnInfo(name = "country_id", index = true)
+    val countryId: Int
+)

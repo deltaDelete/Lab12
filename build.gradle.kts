@@ -2,3 +2,11 @@
 plugins {
     id("com.android.application") version "8.1.1" apply false
 }
+
+extra["kotlin_version"] = "1.9.10"
+
+buildscript {
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
+    }
+}

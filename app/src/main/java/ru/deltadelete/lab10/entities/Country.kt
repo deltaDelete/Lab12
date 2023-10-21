@@ -1,18 +1,19 @@
-package ru.deltadelete.lab10.entities;
+package ru.deltadelete.lab10.entities
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "countries")
-public class Country {
+data class Country (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "country_id")
-    public int id;
+    val id: Int = 0,
 
     @ColumnInfo(name = "country_name")
-    public String name;
+    val name: String,
 
     @ColumnInfo(name = "country_code")
-    public String code;
-}
+    val code: String,
+)

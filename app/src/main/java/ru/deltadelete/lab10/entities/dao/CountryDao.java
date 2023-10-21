@@ -8,10 +8,7 @@ import androidx.room.Transaction;
 
 import java.util.List;
 
-import ru.deltadelete.lab10.entities.Country;
-import ru.deltadelete.lab10.entities.CountryWithTowns;
-import ru.deltadelete.lab10.entities.District;
-import ru.deltadelete.lab10.entities.DistrictWithThings;
+import ru.deltadelete.lab10.entities.*;
 
 @Dao
 public interface CountryDao {
