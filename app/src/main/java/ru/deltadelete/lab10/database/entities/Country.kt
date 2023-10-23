@@ -1,4 +1,4 @@
-package ru.deltadelete.lab10.entities
+package ru.deltadelete.lab10.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,4 +1,4 @@
-package ru.deltadelete.lab10.entities
+package ru.deltadelete.lab10.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import ru.deltadelete.lab10.entities.District
+import ru.deltadelete.lab10.database.entities.District
 
 @Entity(
     tableName = "landmarks",

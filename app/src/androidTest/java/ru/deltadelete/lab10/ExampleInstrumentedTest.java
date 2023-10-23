@@ -12,7 +12,10 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-import ru.deltadelete.lab10.entities.Country;
+import java.lang.reflect.Array;
+
+import ru.deltadelete.lab10.database.AppDatabase;
+import ru.deltadelete.lab10.database.entities.Country;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -29,7 +32,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void checkDbInsert() {
+    public void checkDbInsertAndDelete() {
         AppDatabase db = Room.databaseBuilder(InstrumentationRegistry.getInstrumentation().getTargetContext(),
                 AppDatabase.class, "towns-db").build();
 
@@ -43,6 +46,21 @@ public class ExampleInstrumentedTest {
         }
         finally {
             db.countryDao().delete(c1);
+        }
+    }
+
+    @Test
+    public void checkDbGet() {
+        AppDatabase db = Room.databaseBuilder(InstrumentationRegistry.getInstrumentation().getTargetContext(),
+                AppDatabase.class, "towns-db").build();
+
+        Country c = new Country(0, "Россия", "ru");
+        Country c1 = db.countryDao().loadAllByIds(new int[] {1,2,3,4,5,6,7,8,9}).get(0);
+        try {
+            Assert.assertEquals(c.getName(), c1.getName());
+            Assert.assertEquals(c.getCode(), c1.getCode());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
