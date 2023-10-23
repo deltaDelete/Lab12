@@ -1,0 +1,268 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "4c4c725fa96d53ad746fea43d71313a9",
+    "entities": [
+      {
+        "tableName": "towns",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`town_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `town_name` TEXT NOT NULL, `description` TEXT NOT NULL, `country_id` INTEGER NOT NULL, FOREIGN KEY(`country_id`) REFERENCES `countries`(`country_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "town_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "town_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "countryId",
+            "columnName": "country_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "town_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_towns_country_id",
+            "unique": false,
+            "columnNames": [
+              "country_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_towns_country_id` ON `${TABLE_NAME}` (`country_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "countries",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "country_id"
+            ],
+            "referencedColumns": [
+              "country_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "countries",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`country_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `country_name` TEXT NOT NULL, `country_code` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "country_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "country_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "code",
+            "columnName": "country_code",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "country_id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "districts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`district_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `district_name` TEXT NOT NULL, `town_id` INTEGER NOT NULL, FOREIGN KEY(`town_id`) REFERENCES `towns`(`town_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "district_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "district_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "townId",
+            "columnName": "town_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "district_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_districts_town_id",
+            "unique": false,
+            "columnNames": [
+              "town_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_districts_town_id` ON `${TABLE_NAME}` (`town_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "towns",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "town_id"
+            ],
+            "referencedColumns": [
+              "town_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "landmarks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`landmark_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `landmark_name` TEXT, `district_id` INTEGER NOT NULL, FOREIGN KEY(`district_id`) REFERENCES `districts`(`district_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "landmark_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "landmark_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "districtId",
+            "columnName": "district_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "landmark_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_landmarks_district_id",
+            "unique": false,
+            "columnNames": [
+              "district_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_landmarks_district_id` ON `${TABLE_NAME}` (`district_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "districts",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "district_id"
+            ],
+            "referencedColumns": [
+              "district_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "shops",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`shop_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `shop_name` TEXT NOT NULL, `district_id` INTEGER NOT NULL, FOREIGN KEY(`district_id`) REFERENCES `districts`(`district_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "shop_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "shop_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "districtId",
+            "columnName": "district_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "shop_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_shops_district_id",
+            "unique": false,
+            "columnNames": [
+              "district_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_shops_district_id` ON `${TABLE_NAME}` (`district_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "districts",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "district_id"
+            ],
+            "referencedColumns": [
+              "district_id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4c4c725fa96d53ad746fea43d71313a9')"
+    ]
+  }
+}
