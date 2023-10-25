@@ -6,6 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import ru.deltadelete.lab10.database.dao.LandmarkDao;
+import ru.deltadelete.lab10.database.dao.ShopDao;
 import ru.deltadelete.lab10.database.entities.Country;
 import ru.deltadelete.lab10.database.entities.District;
 import ru.deltadelete.lab10.database.entities.Landmark;
@@ -31,6 +33,10 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract DistrictDao districtDao();
 
     public abstract CountryDao countryDao();
+
+    public abstract LandmarkDao landmarkDao();
+
+    public abstract ShopDao shopDao();
 
     public static volatile AppDatabase Instance;
 

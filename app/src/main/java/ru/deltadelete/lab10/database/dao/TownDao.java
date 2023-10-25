@@ -10,9 +10,6 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import ru.deltadelete.lab10.database.entities.Country;
-import ru.deltadelete.lab10.database.entities.Town;
-import ru.deltadelete.lab10.database.entities.TownWithDistricts;
 import ru.deltadelete.lab10.database.entities.Town;
 import ru.deltadelete.lab10.database.entities.TownWithDistricts;
 

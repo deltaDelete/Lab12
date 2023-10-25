@@ -10,11 +10,8 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import ru.deltadelete.lab10.database.entities.Country;
 import ru.deltadelete.lab10.database.entities.District;
 import ru.deltadelete.lab10.database.entities.DistrictWithThings;
-import ru.deltadelete.lab10.database.entities.Town;
-import ru.deltadelete.lab10.database.entities.TownWithDistricts;
 
 @Dao
 public interface DistrictDao {
