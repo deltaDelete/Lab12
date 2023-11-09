@@ -1,5 +1,6 @@
 package ru.deltadelete.lab10.database.dao;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import ru.deltadelete.lab10.database.entities.Landmark;
 
+@Dao
 public interface LandmarkDao {
     @Query("select * from landmarks")
     List<Landmark> getAll();
