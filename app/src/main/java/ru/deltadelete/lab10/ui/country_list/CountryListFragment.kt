@@ -1,4 +1,4 @@
-package ru.deltadelete.lab10.ui
+package ru.deltadelete.lab10.ui.country_list
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.deltadelete.lab10.R
 import ru.deltadelete.lab10.databinding.FragmentCountryListBinding
 
 class CountryListFragment : Fragment() {

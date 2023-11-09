@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="ru.deltadelete.lab10.ui.CountryListViewModel" />
+            type="ru.deltadelete.lab10.ui.country_list.CountryListViewModel" />
     </data>
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         android:orientation="vertical"
-        tools:context=".ui.CountryListFragment">
+        tools:context=".ui.country_list.CountryListFragment">
 
         <TextView
             android:layout_width="match_parent"

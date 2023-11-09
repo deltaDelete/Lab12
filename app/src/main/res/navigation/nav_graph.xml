@@ -16,7 +16,7 @@
             app:destination="@id/SecondFragment" />
         <action
             android:id="@+id/action_FirstFragment_to_countryListFragment"
-            app:destination="@id/countryListFragment" />
+            app:destination="@id/CountryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -29,9 +29,9 @@
             app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
-        android:id="@+id/countryListFragment"
-        android:name="ru.deltadelete.lab10.ui.CountryListFragment"
-        android:label="CountryListFragment" >
+        android:id="@+id/CountryListFragment"
+        android:name="ru.deltadelete.lab10.ui.country_list.CountryListFragment"
+        android:label="@string/country_list_fragment_label">
         <action
             android:id="@+id/action_countryListFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
