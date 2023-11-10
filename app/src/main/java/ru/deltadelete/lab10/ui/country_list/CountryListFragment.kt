@@ -14,7 +14,6 @@ class CountryListFragment : Fragment() {
         fun newInstance() = CountryListFragment()
     }
 
-    private lateinit var viewModel: CountryListViewModel
     private lateinit var binding: FragmentCountryListBinding
 
     override fun onCreateView(
@@ -27,6 +26,7 @@ class CountryListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = ViewModelProvider(this)[CountryListViewModel::class.java]
+        // TODO выяснить и пофиксить вызываемый здесь Exception
+        binding.viewModel = ViewModelProvider(requireActivity()).get(CountryListViewModel::class.java)
     }
 }

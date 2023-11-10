@@ -2,7 +2,6 @@ package ru.deltadelete.lab10.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "countries")
@@ -16,4 +15,7 @@ data class Country (
 
     @ColumnInfo(name = "country_code")
     val code: String,
-)
+) {
+    val flagUrl: String
+        get() = "https://flagcdn.com/w320/${code}.png"
+}

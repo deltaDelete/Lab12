@@ -44,4 +44,5 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="country_list_fragment_label">Countries</string>
+    <string name="country">Country</string>
 </resources>
