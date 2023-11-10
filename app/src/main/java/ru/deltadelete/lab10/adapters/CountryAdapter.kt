@@ -51,7 +51,6 @@ public class CountryAdapter(context: Context, private val items: MutableList<Cou
 
     override fun add(item: Country?) {
         item?.let {
-            items.add(it)
             super.add(it)
         }
     }
