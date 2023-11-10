@@ -1,25 +1,38 @@
 package ru.deltadelete.lab10.utils
 
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import ru.deltadelete.lab10.R
 
-object BindingAdapters {
+public object BindingAdapters {
     @BindingAdapter(
-        value = ["imageUrl", "error"],
+        value = ["imageUrl"],
         requireAll = false
     )
-    @JvmStatic fun setImageFromCode(view: ImageView, url: String?, @DrawableRes error: Int) {
+    @JvmStatic fun setImageFromCode(view: ImageView, url: String?) {
         if (url == null) {
-            view.setImageResource(error)
+            view.setImageResource(R.drawable.baseline_error_outline_24)
         }
         else {
             Picasso.get()
                 .load(url)
-                .error(error)
-                .into(view)
+                .error(R.drawable.baseline_error_outline_24)
+                .into(view, CallbackError)
+        }
+    }
+
+    object CallbackError : Callback {
+        override fun onSuccess() {
+            Log.d("PICASSO", "Successfully loaded image from imageUrl data binding")
+        }
+        override fun onError(e: java.lang.Exception?) {
+            Log.e("PICASSO", "Error loading image from imageUrl data binding")
+            e?.apply { printStackTrace() }
         }
     }
 }

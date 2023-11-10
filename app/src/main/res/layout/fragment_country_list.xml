@@ -21,14 +21,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{viewModel::firstButtonClick}"
-            android:text="Click me!" />
+            android:text="@{viewModel.text, default=Placeholder}" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::addCountryClick}"
+            android:text="Добавить" />
 <!--        OR android:onClick="@{(view) -> viewModel.firstButtonClick(view)}"-->
 <!--        OR android:onClick="@{() -> viewModel.firstButtonClick()}"-->
 
         <ListView
             android:adapter="@{viewModel.adapter}"
             android:dividerHeight="8dp"
-            android:divider="@color/transparent"
             tools:listitem="@layout/country_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

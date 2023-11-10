@@ -1,43 +1,45 @@
-package ru.deltadelete.lab10.database.dao;
+package ru.deltadelete.lab10.database.dao
 
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-import androidx.room.Transaction;
-import androidx.room.Update;
-
-import java.util.List;
-
-import ru.deltadelete.lab10.database.entities.Country;
-import ru.deltadelete.lab10.database.entities.CountryWithTowns;
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
+import ru.deltadelete.lab10.database.entities.Country
+import ru.deltadelete.lab10.database.entities.CountryWithTowns
 
 @Dao
-public interface CountryDao {
+interface CountryDao {
+    // TODO разобраться с корутинами
     @Query("select * from countries")
-    List<Country> getAll();
+    suspend fun all(): List<Country>
+
+    @Query("select * from countries limit :take")
+    suspend fun take(take: Int): List<Country>
 
     @Query("select * from countries where country_id in (:ids)")
-    List<Country> loadAllByIds(int[] ids);
+    suspend fun loadAllByIds(ids: IntArray): List<Country>
 
     @Query("select * from countries where country_id like :name")
-    Country findByName(String name);
+    suspend fun findByName(name: String): Country?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(Country... towns);
+    suspend fun insertAll(vararg towns: Country)
 
     @Update
-    void update(Country country);
+    suspend fun update(country: Country)
 
     @Delete
-    void delete(Country... towns);
+    suspend fun delete(towns: List<Country>)
 
     @Transaction
-    @Query("select * from countries c where c.country_id = :country_id")
-    CountryWithTowns getWithTowns(int country_id);
+    @Query("select * from countries c where c.country_id = :countryId")
+    suspend fun getWithTowns(countryId: Int): CountryWithTowns?
 
-    @Transaction
     @Query("select * from countries")
-    List<CountryWithTowns> getAllWithTowns();
+    @Transaction
+    suspend fun allWithTowns(): List<CountryWithTowns>
 }

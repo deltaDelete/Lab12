@@ -3,52 +3,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="ru.deltadelete.lab10.database.entities.Country" />
         <variable
             name="item"
             type="ru.deltadelete.lab10.database.entities.Country" />
     </data>
-
+    
     <LinearLayout
-        android:clickable="false"
+        android:id="@+id/root_country_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view"
-            android:clickable="true"
-            app:cardCornerRadius="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--    <androidx.cardview.widget.CardView-->
+        <!--        android:id="@+id/card_view"-->
+        <!--        style="@style/CardView.DayNight"-->
+        <!--        android:foreground="?android:attr/selectableItemBackground"-->
+        <!--        app:cardCornerRadius="16dp"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent"-->
+        <!--        android:clipToPadding="false"-->
+        <!--        android:clickable="true">-->
+        <!--    <com.google.android.material.card.MaterialCardView-->
+        <!--        android:id="@+id/card_view"-->
+        <!--        style="@style/Widget.Material3.CardView.Outlined"-->
+        <!--        android:foreground="?android:attr/selectableItemBackground"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent"-->
+        <!--        android:clickable="true">-->
 
-            <LinearLayout
-                android:paddingHorizontal="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="16dp">
+        <TextView
+            android:id="@+id/text_view_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:maxLines="3"
+            android:text="@{item.name, default=Placeholder}"
+            style="?attr/textAppearanceBody1"
+            android:textSize="24sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:maxLines="3"
-                    android:text="@{item.name, default=Placeholder}"
-                    android:textSize="24sp" />
-
-                <ImageView
-                    imageUrl="@{item.flagUrl}"
-                    error="@drawable/ru"
-                    android:contentDescription="@string/country"
-                    android:src="@drawable/ru"
-                    android:layout_gravity="end"
-                    android:layout_weight="1.5"
-                    android:layout_height="60dp"
-                    android:layout_width="0dp"
-                    android:scaleType="fitCenter"
-                    />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/image_view_flag"
+            imageUrl="@{item.flagUrl}"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="end"
+            android:layout_weight="1.5"
+            android:contentDescription="@string/country"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ru" />
     </LinearLayout>
 </layout>
