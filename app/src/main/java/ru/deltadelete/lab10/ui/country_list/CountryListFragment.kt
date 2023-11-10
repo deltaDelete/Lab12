@@ -13,14 +13,16 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.deltadelete.lab10.database.entities.Country
 import ru.deltadelete.lab10.databinding.FragmentCountryListBinding
 import ru.deltadelete.lab10.utils.dp
+import ru.deltadelete.lab10.utils.value
 
 class CountryListFragment : Fragment() {
 
@@ -97,10 +99,10 @@ class CountryListFragment : Fragment() {
                     return@setPositiveButton
                 }
                 val item = Country(name = name.value!!, code = code.value!!)
-                runBlocking {
+                binding?.viewModel?.adapter?.value?.add(item)
+                lifecycleScope.launch(Dispatchers.IO) {
                     binding?.viewModel?.database?.countryDao()?.insertAll(item)
                 }
-                binding?.viewModel?.adapter?.add(item)
             }
             setNegativeButton("Отмена") { dialog, _ ->
                 dialog.dismiss()

@@ -15,8 +15,7 @@ data class Country (
 
     @ColumnInfo(name = "country_code")
     val code: String,
-)
-
-
-public val Country.flagUrl: String
-    get() = "https://flagcdn.com/h120/${code}.png"
+) {
+    val flagUrl: String
+        get() = "https://flagcdn.com/h120/${code}.png"
+}
