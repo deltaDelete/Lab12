@@ -21,6 +21,7 @@ import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.deltadelete.lab10.R
+import ru.deltadelete.lab10.adapters.CountryAdapter
 import ru.deltadelete.lab10.database.entities.Country
 import ru.deltadelete.lab10.databinding.FragmentCountryListBinding
 import ru.deltadelete.lab10.ui.town_list.TownListFragment
@@ -46,6 +47,7 @@ class CountryListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding?.viewModel?.onAddCountryClick = null
+        binding?.viewModel?.adapter?.value = null
         binding?.viewModel = null
     }
 
@@ -53,14 +55,15 @@ class CountryListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.viewModel = ViewModelProvider(requireActivity())[CountryListViewModel::class.java]
         binding?.viewModel?.onAddCountryClick = this::addCountryClick
-        binding?.viewModel?.adapter?.value?.apply {
-            itemCallbacks.onItemClick = { item, view ->
-                itemClick(item, view)
+        binding?.viewModel?.adapter?.value =
+            CountryAdapter(view.context, emptyList<Country>().toMutableList()).apply {
+                itemCallbacks.onItemClick = { item, view ->
+                    itemClick(item, view)
+                }
+                itemCallbacks.onLongItemClick = { item, view ->
+                    longItemClick(item, view)
+                }
             }
-            itemCallbacks.onLongItemClick = { item, view ->
-                longItemClick(item, view)
-            }
-        }
     }
 
     public fun addCountryClick(view: View) {
@@ -150,8 +153,10 @@ class CountryListFragment : Fragment() {
                     binding?.viewModel?.database?.countryDao()?.delete(item)
                 }
 
-                Snackbar.make(view,
-                    getString(R.string.removed_country, item.name), Snackbar.LENGTH_LONG)
+                Snackbar.make(
+                    view,
+                    getString(R.string.removed_country, item.name), Snackbar.LENGTH_LONG
+                )
                     .setAnchorView(R.id.fab)
                     .setAction("Action", null).show()
             }

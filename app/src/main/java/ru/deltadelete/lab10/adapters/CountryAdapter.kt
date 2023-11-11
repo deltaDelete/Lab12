@@ -36,7 +36,7 @@ public class CountryAdapter(context: Context, private val items: MutableList<Cou
         binding.item = item
         binding.itemCallbacks = itemCallbacks
 
-        return binding.rootCountryItem
+        return binding.root
     }
 
     override fun getItem(position: Int): Country {
