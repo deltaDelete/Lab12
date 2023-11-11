@@ -18,7 +18,7 @@ public interface TownDao {
     @Query("select * from towns")
     List<Town> getAll();
 
-    @Query("select * from towns where :countryId")
+    @Query("select * from towns where towns.country_id = :countryId")
     List<Town> getAllByCountry(int countryId);
 
     @Query("select * from towns where town_id in (:townIds)")

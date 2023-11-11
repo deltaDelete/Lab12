@@ -3,13 +3,17 @@ package ru.deltadelete.lab10.ui.town_list
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import java.lang.IllegalArgumentException
 
 class TownListViewModelFactory(
     private var application: Application,
-    private val countryId: Int
+    private var countryId: Int
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return TownListViewModel(application, countryId) as T
+        if (modelClass.isAssignableFrom(TownListViewModel::class.java)) {
+            return TownListViewModel(application, countryId) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class ${modelClass.name}")
     }
 }

@@ -21,7 +21,7 @@ public class TownListViewModel(application: Application, private var countryId: 
 
     lateinit var items: MutableList<Town>
 
-    public val database: AppDatabase
+    val database: AppDatabase
 
     init {
         val context = getApplication<Application>().applicationContext
@@ -30,7 +30,7 @@ public class TownListViewModel(application: Application, private var countryId: 
         )
         database = AppDatabase.getInstance(context)
         viewModelScope.launch(Dispatchers.IO) {
-            items = database.townDao().getAllByCountry(1)
+            items = database.townDao().getAllByCountry(countryId)
             this.launch(Dispatchers.Main) {
                 adapter.value?.addAll(items)
             }

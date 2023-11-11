@@ -54,7 +54,7 @@ class TownListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val activity = requireActivity()
         binding?.viewModel = ViewModelProvider(
-            activity,
+            this,
             TownListViewModelFactory(activity.application, countryId)
             )[TownListViewModel::class.java]
         binding?.viewModel?.onAddClick = this::addClick
