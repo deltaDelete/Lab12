@@ -5,51 +5,49 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import com.google.android.material.ripple.RippleUtils
-import com.squareup.picasso.Picasso
 import ru.deltadelete.lab10.R
 import ru.deltadelete.lab10.database.entities.Country
+import ru.deltadelete.lab10.database.entities.Town
 import ru.deltadelete.lab10.databinding.CountryItemBinding
+import ru.deltadelete.lab10.databinding.TownItemBinding
 import ru.deltadelete.lab10.utils.ItemCallbacks
 
-public class CountryAdapter(context: Context, private val items: MutableList<Country>) :
-    ArrayAdapter<Country>(context, R.layout.country_item, items) {
+class TownAdapter(context: Context, private val items: MutableList<Town>) :
+    ArrayAdapter<Town>(context, R.layout.town_item, items) {
     @LayoutRes
-    private val layout: Int = R.layout.country_item
+    private val layout: Int = R.layout.town_item
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
-    var itemCallbacks: ItemCallbacks<Country> = ItemCallbacks<Country>()
+    var itemCallbacks: ItemCallbacks<Town> = ItemCallbacks<Town>()
 
     @Override
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val binding: CountryItemBinding = if (convertView == null) {
+        val binding: TownItemBinding = if (convertView == null) {
             DataBindingUtil.inflate(inflater, layout, parent, false)
         } else {
-            DataBindingUtil.bind<CountryItemBinding>(convertView)!!
+            DataBindingUtil.bind(convertView)!!
         }
 
-        val item: Country = getItem(position)
+        val item = getItem(position)
         binding.item = item
         binding.itemCallbacks = itemCallbacks
 
-        return binding.rootCountryItem
+        return binding.rootItem
     }
 
-    override fun getItem(position: Int): Country {
+    override fun getItem(position: Int): Town {
         return items[position]
     }
 
-    override fun add(item: Country?) {
+    override fun add(item: Town?) {
         item?.let {
             super.add(it)
         }
     }
 
-    override fun remove(item: Country?) {
+    override fun remove(item: Town?) {
         item?.let {
             items.remove(it)
             super.remove(it)

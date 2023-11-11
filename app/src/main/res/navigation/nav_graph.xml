@@ -35,5 +35,26 @@
         <action
             android:id="@+id/action_countryListFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_CountryListFragment_to_townListFragment"
+            app:destination="@id/townListFragment">
+
+            <argument
+                android:name="countryId"
+                android:defaultValue="0"
+                app:argType="integer" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/townListFragment"
+        android:name="ru.deltadelete.lab10.ui.town_list.TownListFragment"
+        android:label="@string/towns">
+        <argument
+            android:name="countryId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_townListFragment_to_CountryListFragment"
+            app:destination="@id/CountryListFragment" />
     </fragment>
 </navigation>

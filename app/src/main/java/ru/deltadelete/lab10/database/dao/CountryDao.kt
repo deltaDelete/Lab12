@@ -15,7 +15,6 @@ import ru.deltadelete.lab10.database.entities.CountryWithTowns
 
 @Dao
 interface CountryDao {
-    // TODO разобраться с корутинами
     @Query("select * from countries")
     fun all(): List<Country>
 
@@ -35,7 +34,7 @@ interface CountryDao {
     fun update(country: Country)
 
     @Delete
-    fun delete(towns: List<Country>)
+    fun delete(vararg towns: Country)
 
     @Transaction
     @Query("select * from countries c where c.country_id = :countryId")

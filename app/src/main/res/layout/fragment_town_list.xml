@@ -7,23 +7,14 @@
 
         <variable
             name="viewModel"
-            type="ru.deltadelete.lab10.ui.country_list.CountryListViewModel" />
+            type="ru.deltadelete.lab10.ui.town_list.TownListViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.country_list.CountryListFragment">
-
-        <Button
-            android:id="@+id/fistbsasd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="4dp"
-            android:onClick="@{viewModel::firstButtonClick}"
-            android:text="@{viewModel.text, default=Placeholder}" />
+        tools:context=".ui.town_list.TownListFragment">
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.Material3.Button.TonalButton"
@@ -31,13 +22,13 @@
             android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{viewModel::addCountryClick}"
+            android:onClick="@{viewModel::addClick}"
             android:text="Добавить" />
 
         <ListView
             android:adapter="@{viewModel.adapter}"
             android:dividerHeight="8dp"
-            tools:listitem="@layout/country_item"
+            tools:listitem="@layout/town_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />

@@ -1,8 +1,7 @@
-package ru.deltadelete.lab10.ui.country_list
+package ru.deltadelete.lab10.ui.town_list
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -21,38 +19,45 @@ import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.deltadelete.lab10.R
-import ru.deltadelete.lab10.database.entities.Country
-import ru.deltadelete.lab10.databinding.FragmentCountryListBinding
-import ru.deltadelete.lab10.ui.town_list.TownListFragment
+import ru.deltadelete.lab10.database.entities.Town
+import ru.deltadelete.lab10.databinding.FragmentTownListBinding
 import ru.deltadelete.lab10.utils.dp
 import ru.deltadelete.lab10.utils.value
 
-class CountryListFragment : Fragment() {
+class TownListFragment : Fragment() {
 
     companion object {
-        fun newInstance() = CountryListFragment()
+        public const val COUNTRY_ID_ARGUMENT = "COUNTRY_ID_ARGUMENT"
+        fun newInstance() = TownListFragment()
     }
 
-    private var binding: FragmentCountryListBinding? = null
+    private var countryId: Int = 0
+
+    private var binding: FragmentTownListBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCountryListBinding.inflate(inflater, container, false)
+        binding = FragmentTownListBinding.inflate(inflater, container, false)
+        countryId = arguments?.getInt(COUNTRY_ID_ARGUMENT) ?: 0
         return binding?.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding?.viewModel?.onAddCountryClick = null
+        binding?.viewModel?.onAddClick = null
         binding?.viewModel = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.viewModel = ViewModelProvider(requireActivity())[CountryListViewModel::class.java]
-        binding?.viewModel?.onAddCountryClick = this::addCountryClick
+        val activity = requireActivity()
+        binding?.viewModel = ViewModelProvider(
+            activity,
+            TownListViewModelFactory(activity.application, countryId)
+            )[TownListViewModel::class.java]
+        binding?.viewModel?.onAddClick = this::addClick
         binding?.viewModel?.adapter?.value?.apply {
             itemCallbacks.onItemClick = { item, view ->
                 itemClick(item, view)
@@ -63,12 +68,11 @@ class CountryListFragment : Fragment() {
         }
     }
 
-    public fun addCountryClick(view: View) {
+    public fun addClick(view: View) {
         val context = requireContext()
 
         val name: MutableLiveData<String> = MutableLiveData("")
-        val code: MutableLiveData<String> = MutableLiveData("")
-        val isValid: MutableLiveData<Boolean> = MutableLiveData(false)
+        val desc: MutableLiveData<String> = MutableLiveData("")
 
         val nameEditText = TextInputEditText(context).apply {
             addTextChangedListener { text: Editable? ->
@@ -85,22 +89,19 @@ class CountryListFragment : Fragment() {
             addView(nameEditText)
         }
 
-        val codeEditText = TextInputEditText(context).apply {
-            filters = arrayOf<InputFilter>(
-                InputFilter.LengthFilter(2)
-            )
+        val descEditText = TextInputEditText(context).apply {
             addTextChangedListener { text: Editable? ->
-                code.value = text.toString()
-                error = if (code.value.isNullOrBlank()) {
-                    "Код страны не может быть пустым"
+                desc.value = text.toString()
+                error = if (desc.value.isNullOrBlank()) {
+                    "Описание не может быть пустым"
                 } else {
                     null
                 }
             }
         }
-        val codeInputLayout = TextInputLayout(context).apply {
-            hint = "Код страны"
-            addView(codeEditText)
+        val descInputLayout = TextInputLayout(context).apply {
+            hint = "Описание"
+            addView(descEditText)
         }
 
         MaterialAlertDialogBuilder(context).apply {
@@ -108,17 +109,17 @@ class CountryListFragment : Fragment() {
                 orientation = LinearLayout.VERTICAL
                 setPadding(16.dp)
                 addView(nameInputLayout)
-                addView(codeInputLayout)
+                addView(descInputLayout)
             })
-            setTitle("Добавить страну")
+            setTitle("Добавить город")
             setPositiveButton("Добавить") { _, _ ->
-                if (nameInputLayout.error != null || codeInputLayout.error != null) {
+                if (nameInputLayout.error != null || descInputLayout.error != null) {
                     return@setPositiveButton
                 }
-                val item = Country(name = name.value!!, code = code.value!!)
+                val item = Town(name = name.value!!, description = desc.value!!, countryId = countryId)
                 binding?.viewModel?.adapter?.value?.add(item)
                 lifecycleScope.launch(Dispatchers.IO) {
-                    binding?.viewModel?.database?.countryDao()?.insertAll(item)
+                    binding?.viewModel?.database?.townDao()?.insertAll(item)
                 }
             }
             setNegativeButton("Отмена") { dialog, _ ->
@@ -127,35 +128,30 @@ class CountryListFragment : Fragment() {
         }.create().show()
     }
 
-    private fun itemClick(item: Country, view: View) {
+    private fun itemClick(item: Town, view: View) {
         Snackbar.make(view, item.toString(), Snackbar.LENGTH_LONG)
             .setAnchorView(R.id.fab)
             .setAction("Action", null).show()
-        val args = Bundle().apply {
-            this.putInt(TownListFragment.Companion.COUNTRY_ID_ARGUMENT, item.id)
-        }
-        NavHostFragment.findNavController(this)
-            .navigate(R.id.action_CountryListFragment_to_townListFragment, args)
     }
 
-    private fun longItemClick(item: Country, view: View): Boolean {
+    private fun longItemClick(item: Town, view: View): Boolean {
         val context = requireContext()
 
         MaterialAlertDialogBuilder(context).apply {
-            setTitle(R.string.remove_country)
-            setMessage(getString(R.string.remove_country_message, item.name))
-            setPositiveButton(R.string.remove) { _, _ ->
+            setTitle(getString(R.string.remove_town))
+            setMessage(getString(R.string.remove_town_message, item.name))
+            setPositiveButton(getString(R.string.remove)) { _, _ ->
                 binding?.viewModel?.adapter?.value?.remove(item)
                 lifecycleScope.launch(Dispatchers.IO) {
-                    binding?.viewModel?.database?.countryDao()?.delete(item)
+                    binding?.viewModel?.database?.townDao()?.delete(item)
                 }
 
                 Snackbar.make(view,
-                    getString(R.string.removed_country, item.name), Snackbar.LENGTH_LONG)
+                    getString(R.string.removed_town, item.name), Snackbar.LENGTH_LONG)
                     .setAnchorView(R.id.fab)
                     .setAction("Action", null).show()
             }
-            setNegativeButton(R.string.cancel) { dialog, _ ->
+            setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
                 dialog.dismiss()
             }
         }.create().show()

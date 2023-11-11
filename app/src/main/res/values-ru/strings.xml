@@ -55,4 +55,13 @@
     </string>
     <string name="country_list_fragment_label">Страны</string>
     <string name="country">Страна</string>
+    <string name="towns">Города</string>
+    <string name="remove_town">Удалить город?</string>
+    <string name="remove_town_message">Вы действительно собираетесь удалить город %1$s?</string>
+    <string name="remove">Удалить</string>
+    <string name="removed_town">Удален город %1$s</string>
+    <string name="cancel">Отменить</string>
+    <string name="remove_country">Удалить страну</string>
+    <string name="remove_country_message">Вы действительно собираетесь удалить страну %1$s?</string>
+    <string name="removed_country">Удалена страна %1$s</string>
 </resources>

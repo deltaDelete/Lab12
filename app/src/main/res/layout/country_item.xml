@@ -6,13 +6,19 @@
         <variable
             name="item"
             type="ru.deltadelete.lab10.database.entities.Country" />
+        <variable
+            name="itemCallbacks"
+            type="ru.deltadelete.lab10.utils.ItemCallbacks" />
     </data>
     
     <LinearLayout
         android:id="@+id/root_country_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="false"
+        android:clickable="true"
+        android:longClickable="true"
+        android:onClick="@{(view) -> itemCallbacks.click(item, view)}"
+        android:onLongClick="@{(view) -> itemCallbacks.longClick(item, view)}"
         android:clipToPadding="false"
         android:gravity="center_vertical"
         android:orientation="horizontal"

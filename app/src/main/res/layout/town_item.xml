@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="ru.deltadelete.lab10.database.entities.Town" />
+        <variable
+            name="itemCallbacks"
+            type="ru.deltadelete.lab10.utils.ItemCallbacks" />
+    </data>
+    
+    <LinearLayout
+        android:id="@+id/root_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:longClickable="true"
+        android:onClick="@{(view) -> itemCallbacks.click(item, view)}"
+        android:onLongClick="@{(view) -> itemCallbacks.longClick(item, view)}"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp">
+
+        <TextView
+            android:id="@+id/text_view_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:maxLines="3"
+            android:text="@{item.name, default=Placeholder}"
+            style="?attr/textAppearanceBody1"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+</layout>

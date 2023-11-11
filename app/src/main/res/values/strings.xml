@@ -45,4 +45,13 @@
     </string>
     <string name="country_list_fragment_label">Countries</string>
     <string name="country">Country</string>
+    <string name="towns">Towns</string>
+    <string name="remove_town_message">Do you really want to delete town %1$s</string>
+    <string name="remove">Delete</string>
+    <string name="removed_town">Deleted town %1$s</string>
+    <string name="cancel">Cancel</string>
+    <string name="remove_town">Delete town?</string>
+    <string name="remove_country_message">Do you really want to delete country %1$s?</string>
+    <string name="removed_country">Deleted country %1$s</string>
+    <string name="remove_country">Delete country</string>
 </resources>

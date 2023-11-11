@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ru.deltadelete.lab10.R
@@ -24,6 +25,13 @@ public object BindingAdapters {
                 .error(R.drawable.baseline_error_outline_24)
                 .into(view, CallbackError)
         }
+    }
+
+    @BindingAdapter(
+        value = ["android:adapter"]
+    )
+    @JvmStatic fun setRecyclerViewAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) {
+        view.adapter = adapter
     }
 
     object CallbackError : Callback {
