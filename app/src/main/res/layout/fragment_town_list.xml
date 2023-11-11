@@ -23,11 +23,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{viewModel::addClick}"
-            android:text="Добавить" />
+            android:text="@string/add" />
 
         <ListView
             android:adapter="@{viewModel.adapter}"
-            android:dividerHeight="8dp"
+            android:layout_marginBottom="120dp"
+            android:divider="@color/transparent"
             tools:listitem="@layout/town_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

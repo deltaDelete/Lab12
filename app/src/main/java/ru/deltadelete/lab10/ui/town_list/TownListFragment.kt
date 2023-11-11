@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.deltadelete.lab10.R
+import ru.deltadelete.lab10.adapters.TownAdapter
 import ru.deltadelete.lab10.database.entities.Town
 import ru.deltadelete.lab10.databinding.FragmentTownListBinding
 import ru.deltadelete.lab10.utils.dp
@@ -27,7 +28,7 @@ import ru.deltadelete.lab10.utils.value
 class TownListFragment : Fragment() {
 
     companion object {
-        public const val COUNTRY_ID_ARGUMENT = "COUNTRY_ID_ARGUMENT"
+        const val COUNTRY_ID_ARGUMENT = "COUNTRY_ID_ARGUMENT"
         fun newInstance() = TownListFragment()
     }
 
@@ -47,6 +48,7 @@ class TownListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding?.viewModel?.onAddClick = null
+        binding?.viewModel?.adapter?.value = null
         binding?.viewModel = null
     }
 
@@ -58,7 +60,8 @@ class TownListFragment : Fragment() {
             TownListViewModelFactory(activity.application, countryId)
             )[TownListViewModel::class.java]
         binding?.viewModel?.onAddClick = this::addClick
-        binding?.viewModel?.adapter?.value?.apply {
+        binding?.viewModel?.adapter?.value =
+        TownAdapter(view.context, emptyList<Town>().toMutableList()).apply {
             itemCallbacks.onItemClick = { item, view ->
                 itemClick(item, view)
             }
@@ -68,7 +71,7 @@ class TownListFragment : Fragment() {
         }
     }
 
-    public fun addClick(view: View) {
+    fun addClick(view: View) {
         val context = requireContext()
 
         val name: MutableLiveData<String> = MutableLiveData("")

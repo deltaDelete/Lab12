@@ -33,7 +33,7 @@ public class CountryListViewModel(application: Application) : AndroidViewModel(a
         val context = getApplication<Application>().applicationContext
         database = AppDatabase.getInstance(context)
         adapter = ObservableField<CountryAdapter>()
-        adapter.addOnPropertyChangedCallback { sender, propertyId ->
+        adapter.addOnPropertyChangedCallback { _, _ ->
             viewModelScope.launch(Dispatchers.IO) {
                 items = database.countryDao().all().toMutableList()
                 this.launch(Dispatchers.Main) {

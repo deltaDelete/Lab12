@@ -3,37 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="item"
             type="ru.deltadelete.lab10.database.entities.Town" />
+
         <variable
             name="itemCallbacks"
             type="ru.deltadelete.lab10.utils.ItemCallbacks" />
     </data>
-    
-    <LinearLayout
+
+    <FrameLayout
         android:id="@+id/root_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:longClickable="true"
-        android:onClick="@{(view) -> itemCallbacks.click(item, view)}"
-        android:onLongClick="@{(view) -> itemCallbacks.longClick(item, view)}"
-        android:clipToPadding="false"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="16dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/text_view_name"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:maxLines="3"
-            android:text="@{item.name, default=Placeholder}"
-            style="?attr/textAppearanceBody1"
-            android:textSize="24sp" />
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:longClickable="true"
+            android:onClickListener="@{(view) -> itemCallbacks.click(item, view)}"
+            android:onLongClickListener="@{(view) -> itemCallbacks.longClick(item, view)}">
 
-    </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp">
+
+                <TextView
+                    android:id="@+id/text_view_name"
+                    style="?attr/textAppearanceBody1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:maxLines="3"
+                    android:text="@{item.name, default=Placeholder}"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 </layout>
