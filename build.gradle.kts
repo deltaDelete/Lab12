@@ -2,10 +2,11 @@
 plugins {
     id("com.android.application") version "8.1.3" apply false
     id("org.jetbrains.kotlin.android") version "1.9.10" apply false
+    id("com.google.devtools.ksp") version "1.9.10-1.0.13" apply false
 }
 
 extra["kotlinVersion"] = "1.9.10"
-extra["roomVersion"] = "2.5.0"
+extra["roomVersion"] = "2.6.0"
 extra["navVersion"] = "2.6.0"
 extra["imageLoaderVersion"] = "2.8"
 

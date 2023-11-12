@@ -39,7 +39,7 @@ public class ExampleInstrumentedTest {
         Country c = new Country(0, "Россия", "RU");
         db.countryDao().insertAll(c);
 
-        Country c1 = db.countryDao().all.get(0);
+        Country c1 = db.countryDao().all().get(0);
         try {
             Assert.assertEquals(c.getName(), c1.getName());
             Assert.assertEquals(c.getCode(), c1.getCode());
