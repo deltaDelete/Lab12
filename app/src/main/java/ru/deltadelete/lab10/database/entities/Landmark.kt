@@ -17,7 +17,7 @@ import ru.deltadelete.lab10.database.entities.District
         onDelete = CASCADE
     )]
 )
-public data class Landmark(
+data class Landmark(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "landmark_id")
     val id : Int = 0,

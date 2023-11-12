@@ -17,7 +17,7 @@ import ru.deltadelete.lab10.database.entities.Country
         onDelete = CASCADE
     )]
 )
-public data class Town (
+data class Town (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "town_id")
     val id  : Int = 0,
