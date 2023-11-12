@@ -1,5 +1,3 @@
-import com.google.devtools.ksp.gradle.KspExtension
-
 plugins {
     id("com.android.application")
     kotlin("android")

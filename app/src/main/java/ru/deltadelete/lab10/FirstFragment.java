@@ -9,9 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import ru.deltadelete.lab10.database.entities.Country;
 import ru.deltadelete.lab10.databinding.FragmentFirstBinding;
-import ru.deltadelete.lab10.ui.country_list.CountryListFragment;
 
 public class FirstFragment extends Fragment {
 

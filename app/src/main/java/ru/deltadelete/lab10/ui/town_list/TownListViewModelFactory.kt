@@ -3,7 +3,6 @@ package ru.deltadelete.lab10.ui.town_list
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import java.lang.IllegalArgumentException
 
 class TownListViewModelFactory(
     private var application: Application,

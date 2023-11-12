@@ -4,9 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import ru.deltadelete.lab10.database.entities.Town
 
 @Entity(
     tableName = "districts",

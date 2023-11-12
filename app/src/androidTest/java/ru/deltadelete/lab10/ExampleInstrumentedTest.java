@@ -1,18 +1,16 @@
 package ru.deltadelete.lab10;
 
+import static org.junit.Assert.assertEquals;
+
 import android.content.Context;
 
 import androidx.room.Room;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
-
-import java.lang.reflect.Array;
 
 import ru.deltadelete.lab10.database.AppDatabase;
 import ru.deltadelete.lab10.database.entities.Country;

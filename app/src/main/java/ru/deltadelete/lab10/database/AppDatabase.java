@@ -6,16 +6,16 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import ru.deltadelete.lab10.database.dao.CountryDao;
+import ru.deltadelete.lab10.database.dao.DistrictDao;
 import ru.deltadelete.lab10.database.dao.LandmarkDao;
 import ru.deltadelete.lab10.database.dao.ShopDao;
+import ru.deltadelete.lab10.database.dao.TownDao;
 import ru.deltadelete.lab10.database.entities.Country;
 import ru.deltadelete.lab10.database.entities.District;
 import ru.deltadelete.lab10.database.entities.Landmark;
 import ru.deltadelete.lab10.database.entities.Shop;
 import ru.deltadelete.lab10.database.entities.Town;
-import ru.deltadelete.lab10.database.dao.CountryDao;
-import ru.deltadelete.lab10.database.dao.DistrictDao;
-import ru.deltadelete.lab10.database.dao.TownDao;
 
 @Database(
         entities = {

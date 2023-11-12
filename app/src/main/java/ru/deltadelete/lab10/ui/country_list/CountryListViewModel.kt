@@ -1,17 +1,12 @@
 package ru.deltadelete.lab10.ui.country_list
 
 import android.app.Application
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.Observable
 import androidx.databinding.ObservableField
-import androidx.databinding.ObservableList
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.deltadelete.lab10.R
 import ru.deltadelete.lab10.adapters.CountryAdapter
 import ru.deltadelete.lab10.database.AppDatabase
 import ru.deltadelete.lab10.database.entities.Country

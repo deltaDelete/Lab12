@@ -8,9 +8,7 @@ import android.widget.ArrayAdapter
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import ru.deltadelete.lab10.R
-import ru.deltadelete.lab10.database.entities.Country
 import ru.deltadelete.lab10.database.entities.Town
-import ru.deltadelete.lab10.databinding.CountryItemBinding
 import ru.deltadelete.lab10.databinding.TownItemBinding
 import ru.deltadelete.lab10.utils.ItemCallbacks
 

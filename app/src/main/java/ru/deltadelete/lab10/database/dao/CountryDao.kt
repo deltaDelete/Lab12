@@ -1,6 +1,5 @@
 package ru.deltadelete.lab10.database.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -8,8 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
 import ru.deltadelete.lab10.database.entities.Country
 import ru.deltadelete.lab10.database.entities.CountryWithTowns
 
