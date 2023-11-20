@@ -5,11 +5,11 @@
 
         <variable
             name="item"
-            type="ru.deltadelete.lab10.database.entities.Country" />
+            type="ru.deltadelete.lab11.database.entities.Country" />
 
         <variable
             name="itemCallbacks"
-            type="ru.deltadelete.lab10.utils.ItemCallbacks" />
+            type="ru.deltadelete.lab11.utils.ItemCallbacks" />
     </data>
 
     <FrameLayout

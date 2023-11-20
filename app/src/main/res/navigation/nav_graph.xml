@@ -3,56 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/CountryListFragment">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="ru.deltadelete.lab10.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-        <action
-            android:id="@+id/action_FirstFragment_to_countryListFragment"
-            app:destination="@id/CountryListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="ru.deltadelete.lab10.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
     <fragment
         android:id="@+id/CountryListFragment"
-        android:name="ru.deltadelete.lab10.ui.country_list.CountryListFragment"
-        android:label="@string/country_list_fragment_label">
-        <action
-            android:id="@+id/action_countryListFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+        android:name="ru.deltadelete.lab11.ui.country_list.CountryListFragment"
+        android:label="@string/country_list_fragment_label"
+        tools:layout="@layout/fragment_country_list" >
         <action
             android:id="@+id/action_CountryListFragment_to_townListFragment"
-            app:destination="@id/townListFragment">
-
-            <argument
-                android:name="countryId"
-                android:defaultValue="0"
-                app:argType="integer" />
-        </action>
+            app:destination="@id/townListFragment" />
+        <argument
+            android:name="countryId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/townListFragment"
-        android:name="ru.deltadelete.lab10.ui.town_list.TownListFragment"
-        android:label="@string/towns">
-        <argument
-            android:name="countryId"
-            android:defaultValue="0"
-            app:argType="integer" />
+        android:name="ru.deltadelete.lab11.ui.town_list.TownListFragment"
+        android:label="@string/towns"
+        tools:layout="@layout/fragment_town_list">
         <action
             android:id="@+id/action_townListFragment_to_CountryListFragment"
             app:destination="@id/CountryListFragment" />
