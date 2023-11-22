@@ -56,9 +56,6 @@ class CountryListFragment : Fragment() {
                 }
             binding.listView.adapter = adapter
         }
-//        viewModel.text.observe(viewLifecycleOwner) {
-//            binding.fistbsasd.text = it
-//        }
         binding.viewModel = viewModel
         return binding.root
     }
