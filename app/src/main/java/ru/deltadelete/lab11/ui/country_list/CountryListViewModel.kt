@@ -10,16 +10,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.deltadelete.lab11.database.AppDatabase
 import ru.deltadelete.lab11.database.entities.Country
-import ru.deltadelete.lab11.utils.addOnPropertyChangedCallback
-import ru.deltadelete.lab11.utils.value
+import ru.deltadelete.lab11.utils.asLiveData
 
 class CountryListViewModel(application: Application) : AndroidViewModel(application) {
-    val text: MutableLiveData<String> = MutableLiveData("Кнопка для теста")
+    private val _text: MutableLiveData<String> = MutableLiveData("Кнопка для теста")
+    private val _items: MutableLiveData<MutableList<Country>> =
+        MutableLiveData(emptyList<Country>().toMutableList())
+
+    val text: LiveData<String>
+        get() = _text.asLiveData()
+
+    val items: LiveData<MutableList<Country>>
+        get() = _items.asLiveData()
 
     var onAddCountryClick: ((View) -> Unit)? = null
 
-    val items: MutableLiveData<MutableList<Country>> =
-        MutableLiveData(emptyList<Country>().toMutableList())
 
     val database: AppDatabase
 
@@ -27,12 +32,12 @@ class CountryListViewModel(application: Application) : AndroidViewModel(applicat
         val context = getApplication<Application>().applicationContext
         database = AppDatabase.getInstance(context)
         viewModelScope.launch(Dispatchers.IO) {
-            items.postValue(database.countryDao().all().toMutableList())
+            _items.postValue(database.countryDao().all().toMutableList())
         }
     }
 
     fun firstButtonClick(view: View) {
-        text.value = "Текст изменен"
+        _text.value = "Текст изменен"
     }
 
     fun addCountryClick(view: View) {

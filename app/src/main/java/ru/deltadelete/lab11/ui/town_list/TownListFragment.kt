@@ -20,12 +20,10 @@ import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.deltadelete.lab11.R
-import ru.deltadelete.lab11.adapters.CountryAdapter
 import ru.deltadelete.lab11.adapters.TownAdapter
 import ru.deltadelete.lab11.database.entities.Town
 import ru.deltadelete.lab11.databinding.FragmentTownListBinding
 import ru.deltadelete.lab11.utils.dp
-import ru.deltadelete.lab11.utils.value
 
 class TownListFragment : Fragment() {
 
@@ -44,6 +42,7 @@ class TownListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTownListBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
         countryId = arguments?.getInt(COUNTRY_ID_ARGUMENT) ?: 0
         viewModel = ViewModelProvider(
             this, TownListViewModelFactory(

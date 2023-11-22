@@ -12,7 +12,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -20,7 +19,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import ru.deltadelete.lab11.R
 import ru.deltadelete.lab11.adapters.CountryAdapter
@@ -28,7 +26,6 @@ import ru.deltadelete.lab11.database.entities.Country
 import ru.deltadelete.lab11.databinding.FragmentCountryListBinding
 import ru.deltadelete.lab11.ui.town_list.TownListFragment
 import ru.deltadelete.lab11.utils.dp
-import ru.deltadelete.lab11.utils.value
 
 class CountryListFragment : Fragment() {
 
@@ -45,6 +42,7 @@ class CountryListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCountryListBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
         viewModel.onAddCountryClick = this::addCountryClick
         viewModel.items.observe(viewLifecycleOwner) {
             adapter =
@@ -58,9 +56,9 @@ class CountryListFragment : Fragment() {
                 }
             binding.listView.adapter = adapter
         }
-        viewModel.text.observe(viewLifecycleOwner) {
-            binding.fistbsasd.text = it
-        }
+//        viewModel.text.observe(viewLifecycleOwner) {
+//            binding.fistbsasd.text = it
+//        }
         binding.viewModel = viewModel
         return binding.root
     }
@@ -80,7 +78,6 @@ class CountryListFragment : Fragment() {
 
         val name: MutableLiveData<String> = MutableLiveData("")
         val code: MutableLiveData<String> = MutableLiveData("")
-        val isValid: MutableLiveData<Boolean> = MutableLiveData(false)
 
         val nameEditText = TextInputEditText(context).apply {
             addTextChangedListener { text: Editable? ->
