@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="ru.deltadelete.lab11.ui.country_list.CountryListViewModel" />
+            type="ru.deltadelete.lab12.ui.country_list.CountryListViewModel" />
     </data>
 
     <LinearLayout

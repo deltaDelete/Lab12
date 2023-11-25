@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/CountryListFragment"
-        android:name="ru.deltadelete.lab11.ui.country_list.CountryListFragment"
+        android:name="ru.deltadelete.lab12.ui.country_list.CountryListFragment"
         android:label="@string/country_list_fragment_label"
         tools:layout="@layout/fragment_country_list" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/townListFragment"
-        android:name="ru.deltadelete.lab11.ui.town_list.TownListFragment"
+        android:name="ru.deltadelete.lab12.ui.town_list.TownListFragment"
         android:label="@string/towns"
         tools:layout="@layout/fragment_town_list">
         <action

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="ru.deltadelete.lab11.ui.town_list.TownListViewModel" />
+            type="ru.deltadelete.lab12.ui.town_list.TownListViewModel" />
     </data>
 
     <LinearLayout
