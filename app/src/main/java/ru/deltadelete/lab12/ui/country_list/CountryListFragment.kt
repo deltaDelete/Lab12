@@ -194,12 +194,12 @@ class CountryListFragment : Fragment() {
     }
 
     fun onExportSelected(): Boolean {
-        viewModel.export()
+        viewModel.export(requireView())
         return true
     }
 
     fun onImportSelected(): Boolean {
-        viewModel.import()
+        viewModel.import(requireView())
         return true
     }
 }

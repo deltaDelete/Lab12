@@ -8,8 +8,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.deltadelete.lab12.R
 import ru.deltadelete.lab12.database.AppDatabase
 import ru.deltadelete.lab12.database.entities.Country
 import ru.deltadelete.lab12.utils.asLiveData
@@ -31,12 +35,7 @@ class CountryListViewModel(application: Application) : AndroidViewModel(applicat
 
     val database: AppDatabase
 
-    val sharedPreferences = application.getSharedPreferences(
-        CountryListViewModel::class.simpleName!!,
-        Context.MODE_PRIVATE
-    )
-    val prefsEditor = sharedPreferences.edit()
-    var list by SharedPrefs("list", "CountryListFragment", "")
+    var list: String by SharedPrefs("list", "CountryListFragment", "[]")
 
     init {
         val context = getApplication<Application>().applicationContext
@@ -54,16 +53,36 @@ class CountryListViewModel(application: Application) : AndroidViewModel(applicat
         onAddCountryClick?.invoke(view)
     }
 
-    fun import() {
+    private val gson: Gson = Gson()
+    private val itemType = object : TypeToken<List<Country>>() {}.type
 
+    fun import(view: View) {
+        try {
+            val some: List<Country> = gson.fromJson<List<Country>>(list, itemType) ?: emptyList()
+            if (some.isEmpty()) {
+                return
+            }
+            _items.value = some.toMutableList()
+
+            Snackbar.make(
+                view,
+                R.string.imported, Snackbar.LENGTH_LONG
+            ).show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
-    fun export() {
+    fun export(view: View) {
+        list = gson.toJson(items.value)
 
+        Snackbar.make(
+            view,
+            R.string.exported, Snackbar.LENGTH_LONG
+        ).show()
     }
 }
 
-// TODO SharedPrefs by operator
 class SharedPrefs(
     val key: String,
     val store: String,
@@ -73,23 +92,22 @@ class SharedPrefs(
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var edit: SharedPreferences.Editor
 
-    operator fun SharedPreferences.setValue(
+    operator fun setValue(
         viewModel: CountryListViewModel,
         property: KProperty<*>,
         value: String
-    )
-    {
+    ) {
         checkInit(viewModel.getApplication())
         edit.putString(key, value)
         edit.apply()
     }
 
-    operator fun SharedPreferences.getValue(
+    operator fun getValue(
         viewModel: CountryListViewModel,
         property: KProperty<*>
-    ) {
+    ): String {
         checkInit(viewModel.getApplication())
-        sharedPreferences.getString(key, initialValue)!!
+        return sharedPreferences.getString(key, initialValue)!!
     }
 
     private fun checkInit(context: Context): Boolean {

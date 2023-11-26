@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "ru.deltadelete.lab11"
+    namespace = "ru.deltadelete.lab12"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ru.deltadelete.lab11"
+        applicationId = "ru.deltadelete.lab12"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -77,6 +77,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.squareup.picasso:picasso:$imageLoaderVersion")
 
     implementation("androidx.room:room-runtime:$roomVersion")

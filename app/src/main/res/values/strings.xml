@@ -55,6 +55,8 @@
     <string name="removed_country">Deleted country %1$s</string>
     <string name="remove_country">Delete country</string>
     <string name="add">Add</string>
-    <string name="export">Export to shared preferences</string>
+    <string name="menu_export">Export to shared preferences</string>
     <string name="menu_import">Import from shared preferences</string>
+    <string name="imported">Successfully imported list</string>
+    <string name="exported">Successfully exported list</string>
 </resources>

@@ -19,12 +19,13 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            style="@style/Widget.Material3.CardView.Filled"
+            style="@style/ItemCardView.Middle.Filled"
+            android:id="@+id/card"
             android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="8dp"
+            android:layout_marginVertical="4dp"
             android:clickable="true"
             android:longClickable="true"
             android:onClickListener="@{(view) -> itemCallbacks.click(item, view)}"

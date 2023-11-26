@@ -146,7 +146,6 @@ class TownListFragment : Fragment() {
 
     private fun itemClick(item: Town, view: View) {
         Snackbar.make(view, item.toString(), Snackbar.LENGTH_LONG)
-            .setAnchorView(R.id.fab)
             .setAction("Action", null).show()
     }
 
@@ -166,7 +165,6 @@ class TownListFragment : Fragment() {
                     view,
                     getString(R.string.removed_town, item.name), Snackbar.LENGTH_LONG
                 )
-                    .setAnchorView(R.id.fab)
                     .setAction("Action", null).show()
             }
             setNegativeButton(getString(R.string.cancel)) { dialog, _ ->

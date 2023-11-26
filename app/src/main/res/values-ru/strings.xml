@@ -65,6 +65,8 @@
     <string name="remove_country_message">Вы действительно собираетесь удалить страну %1$s?</string>
     <string name="removed_country">Удалена страна %1$s</string>
     <string name="add">Добавить</string>
-    <string name="export">Экспортировать в общие настройки</string>
-    <string name="import">Импортировать из общих настроек</string>
+    <string name="menu_export">Экспортировать в общие настройки</string>
+    <string name="menu_import">Импортировать из общих настроек</string>
+    <string name="imported">Список успешно импортирован</string>
+    <string name="exported">Список успешно экспортирован</string>
 </resources>
